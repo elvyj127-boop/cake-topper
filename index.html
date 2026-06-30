@@ -962,8 +962,8 @@ function e(e,t,n,r){Object.defineProperty(e,t,{get:n,set:r,enumerable:!0,configu
               const F=`ORDER: ${t}\nName: ${x}\nEmail: ${w}\nPhone: ${E||"N/A"}\nDate needed: ${z}\nQty: ${N}\nSize: ${g}\nCake style: ${U}\nSticks: ${V?"Yes":"No"}\nBase plate: ${n?"Yes ("+l+")":"No"}\nThickness: ${u}mm\nLines:\n${e.map((e,t)=>`  Line ${t+1}: "${e.text}" | Font: ${e.font} | Colour: ${e.color}`).join("\n")}\nNotes: ${y||"None"}`;
               await(new Promise((e,t)=>{if(window.emailjs)return e();const n=document.createElement("script");n.src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js",n.onload=()=>e(),n.onerror=()=>t(Error("Failed to load EmailJS")),document.head.appendChild(n)}));
               window.emailjs.init("3xIKdhIX2eoAEEU9c");
-              await window.emailjs.send("service_ks59sux","template_f18w17l",{order_number:t,name:x,email:w,order_body:F});
-              try{await window.emailjs.send("service_ks59sux","template_2jxwqh7",{name:x,email:w,order_number:t,event_date:z,quantity:String(N),estimated_price:`$${q()} AUD`,topper_size:g,topper_image:m})}catch(e){console.warn("Auto-reply failed:",e)}
+              await window.emailjs.send("service_ks59sux","template_f18w17l",{order_number:t,name:x,email:w,order_body:F,event_date:z,quantity:String(N),estimated_price:`$${q()} AUD`,topper_size:g,topper_image:m});
+              try{await window.emailjs.send("service_ks59sux","template_2jxwqh7",{name:x,email:w,order_number:t,event_date:z,quantity:String(N),estimated_price:`$${q()} AUD`,topper_size:g,topper_image:m,order_body:F})}catch(e){console.warn("Auto-reply failed:",e)}
               B(x);j(!0);k("");S("");C("");P("");T(1);L(!1);v("");
             }catch(e){console.error("EmailJS error:",e);alert("Something went wrong. Please try again or email visionprints3d@gmail.com directly.")}
             finally{M(!1)}
