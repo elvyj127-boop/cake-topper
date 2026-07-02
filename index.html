@@ -1414,4 +1414,30 @@ select.vp-input option:hover {
 })();
 </script>
 
+<style>
+.vp-embed-full .vp-sticky-cta{display:none!important}
+</style>
+<script>
+(function(){
+  if(window.parent===window)return;
+  if(!/[?&]embed=full/.test(location.search))return;
+  document.documentElement.classList.add("vp-embed-full");
+  var post=function(){
+    var h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+    window.parent.postMessage({vpTopper:"height",h:h},"*");
+  };
+  if(window.ResizeObserver)new ResizeObserver(post).observe(document.body);
+  window.addEventListener("load",post);
+  setInterval(post,1500);
+  new MutationObserver(function(){
+    var m=document.querySelector(".vp-modal-bg");
+    if(m&&!m.__vpSeen){
+      m.__vpSeen=true;
+      var h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+      window.parent.postMessage({vpTopper:"modal",y:Math.round(h/2)},"*");
+    }
+  }).observe(document.body,{childList:true,subtree:true});
+  post();
+})();
+</script>
 </body>
